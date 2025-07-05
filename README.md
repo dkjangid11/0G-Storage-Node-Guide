@@ -143,7 +143,7 @@ UUID=xxxxxxx  /zkcache  ext4  defaults,nofail  0  2
 ## ⚡ Step 7: Download Snapshot to SSD
 
 ```bash
-wget https://github.com/Mayankgg01/0G-Storage-Node-Guide/releases/download/v1.0/flow_db.tar.gz \
+wget https://github.com/dkjangid11/0G-Storage-Node-Guide/releases/download/v1.0/flow_db.tar.gz \
   -O /zkcache/0g-node-data/flow_db.tar.gz
 ```
 
