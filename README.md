@@ -26,7 +26,9 @@ A simple guide to install and run a 0G Storage Node with snapshot support, optim
 
 ```bash
 sudo apt update && sudo apt upgrade -y
+```
 
+```bash
 sudo apt install curl iptables build-essential git wget lz4 jq make cmake gcc nano \
 automake autoconf tmux htop nvme-cli libgbm1 pkg-config libssl-dev libleveldb-dev \
 tar clang bsdmainutils ncdu unzip libleveldb-dev screen ufw -y
@@ -38,7 +40,13 @@ tar clang bsdmainutils ncdu unzip libleveldb-dev screen ufw -y
 
 ```bash
 curl https://sh.rustup.rs -sSf | sh
+```
+
+```bash
 source $HOME/.cargo/env
+```
+
+```bash
 rustc --version
 ```
 
@@ -48,11 +56,29 @@ rustc --version
 
 ```bash
 wget https://go.dev/dl/go1.24.3.linux-amd64.tar.gz
+```
+
+```bash
 sudo rm -rf /usr/local/go
+```
+
+```bash
 sudo tar -C /usr/local -xzf go1.24.3.linux-amd64.tar.gz
+```
+
+```bash
 rm go1.24.3.linux-amd64.tar.gz
+```
+
+```bash
 echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
+```
+
+```bash
 source ~/.bashrc
+```
+
+```bash
 go version
 ```
 
@@ -62,9 +88,21 @@ go version
 
 ```bash
 git clone https://github.com/0glabs/0g-storage-node.git
+```
+
+```bash
 cd 0g-storage-node
+```
+
+```bash
 git checkout v1.0.0
+```
+
+```bash
 git submodule update --init
+```
+
+```bash
 cargo build --release
 ```
 
@@ -74,10 +112,11 @@ cargo build --release
 
 ```bash
 rm -rf $HOME/0g-storage-node/run/config.toml
-curl -o $HOME/0g-storage-node/run/config.toml https://raw.githubusercontent.com/Mayankgg01/0G-Storage-Node-Guide/main/config.toml
 ```
 
-Then edit it:
+```bash
+curl -o $HOME/0g-storage-node/run/config.toml https://raw.githubusercontent.com/Mayankgg01/0G-Storage-Node-Guide/main/config.toml
+```
 
 ```bash
 nano $HOME/0g-storage-node/run/config.toml
@@ -94,22 +133,32 @@ nano $HOME/0g-storage-node/run/config.toml
 
 ```bash
 lsblk  # Check your SSD disk name (e.g., nvme0n1)
+```
 
+```bash
 sudo mkfs.ext4 -F /dev/nvme0n1
-sudo mkdir -p /zkcache/0g-node-data
-sudo mount /dev/nvme0n1 /zkcache
+```
 
+```bash
+sudo mkdir -p /zkcache/0g-node-data
+```
+
+```bash
+sudo mount /dev/nvme0n1 /zkcache
+```
+
+```bash
 df -h /zkcache  # Confirm mount
 ```
 
-(Optional) For auto-mount on reboot:
+### Optional: Auto-mount on reboot
 ```bash
 sudo blkid /dev/nvme0n1
 ```
 
-Then add the UUID to `/etc/fstab`:
+Edit `/etc/fstab` and add:
 ```
-UUID=xxxxx  /zkcache  ext4  defaults,nofail  0  2
+UUID=xxxxxxx  /zkcache  ext4  defaults,nofail  0  2
 ```
 
 ---
@@ -119,8 +168,13 @@ UUID=xxxxx  /zkcache  ext4  defaults,nofail  0  2
 ```bash
 wget https://github.com/Mayankgg01/0G-Storage-Node-Guide/releases/download/v1.0/flow_db.tar.gz \
   -O /zkcache/0g-node-data/flow_db.tar.gz
+```
 
+```bash
 tar -xzvf /zkcache/0g-node-data/flow_db.tar.gz -C /zkcache/0g-node-data/
+```
+
+```bash
 rm /zkcache/0g-node-data/flow_db.tar.gz
 ```
 
@@ -152,8 +206,17 @@ EOF
 ## 🚀 Step 9: Start the Node
 
 ```bash
+# Reload systemd to recognize the new service
 sudo systemctl daemon-reload
+```
+
+```bash
+# Enable the service to auto-start on boot
 sudo systemctl enable zgs
+```
+
+```bash
+# Start the node
 sudo systemctl start zgs
 ```
 
@@ -161,19 +224,19 @@ sudo systemctl start zgs
 
 ## 📡 Step 10: Monitor Logs and Sync
 
-### Check Status
+### Check Service Status
 
 ```bash
 sudo systemctl status zgs
 ```
 
-### View Logs
+### View Latest Logs
 
 ```bash
 tail -f ~/0g-storage-node/run/log/zgs.log.$(TZ=UTC date +%Y-%m-%d)
 ```
 
-### Live Sync Status Script
+### Live Sync Monitor
 
 ```bash
 while true; do
@@ -188,12 +251,21 @@ done
 
 ---
 
-## ❌ To Stop and Remove the Node
+## ❌ Stop and Remove the Node
 
 ```bash
 sudo systemctl stop zgs
+```
+
+```bash
 sudo systemctl disable zgs
+```
+
+```bash
 sudo rm /etc/systemd/system/zgs.service
+```
+
+```bash
 sudo systemctl daemon-reexec
 ```
 
@@ -202,6 +274,5 @@ sudo systemctl daemon-reexec
 ## 🙌 Credits
 
 - [0G Labs](https://0g.ai)
-- [Testnet Docs](https://docs.0g.ai)
+- [Docs](https://docs.0g.ai)
 - [Faucet](https://faucet.0g.ai)
-- Config & Snapshot: [@Mayankgg01](https://github.com/Mayankgg01)
