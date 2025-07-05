@@ -55,26 +55,11 @@ rustc --version
 ## 🟨 Step 3: Install Go
 
 ```bash
-wget https://go.dev/dl/go1.24.3.linux-amd64.tar.gz
-```
-
-```bash
-sudo rm -rf /usr/local/go
-```
-
-```bash
-sudo tar -C /usr/local -xzf go1.24.3.linux-amd64.tar.gz
-```
-
-```bash
-rm go1.24.3.linux-amd64.tar.gz
-```
-
-```bash
-echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
-```
-
-```bash
+wget https://go.dev/dl/go1.24.3.linux-amd64.tar.gz && \
+sudo rm -rf /usr/local/go && \
+sudo tar -C /usr/local -xzf go1.24.3.linux-amd64.tar.gz && \
+rm go1.24.3.linux-amd64.tar.gz && \
+echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc && \
 source ~/.bashrc
 ```
 
@@ -91,15 +76,7 @@ git clone https://github.com/0glabs/0g-storage-node.git
 ```
 
 ```bash
-cd 0g-storage-node
-```
-
-```bash
-git checkout v1.0.0
-```
-
-```bash
-git submodule update --init
+cd 0g-storage-node && git checkout v1.0.0 && git submodule update --init
 ```
 
 ```bash
@@ -115,7 +92,7 @@ rm -rf $HOME/0g-storage-node/run/config.toml
 ```
 
 ```bash
-curl -o $HOME/0g-storage-node/run/config.toml https://raw.githubusercontent.com/Mayankgg01/0G-Storage-Node-Guide/main/config.toml
+curl -o $HOME/0g-storage-node/run/config.toml https://raw.githubusercontent.com/dkjangid11/0G-Storage-Node-Guide/main/config.toml
 ```
 
 ```bash
@@ -124,7 +101,7 @@ nano $HOME/0g-storage-node/run/config.toml
 
 ### ✏️ In the config:
 - Add your **wallet's private key** to `miner_key` (❗Don't use `0x` prefix)
-- Change the data directory to:  
+- Change the data directory to:  (if other than this)
   `db_dir = "/zkcache/0g-node-data"`
 
 ---
