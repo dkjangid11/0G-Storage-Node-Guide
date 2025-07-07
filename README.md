@@ -7,7 +7,7 @@ A simple guide to install and run a 0G Storage Node with snapshot support, optim
 ## ⚙️ System Requirements
 
 - Ubuntu 22.04 or 24.04
-- Minimum: 4 vCPUs, 16G RAM
+- Minimum: 4 vCPUs, 16GB RAM
 - At least 350GB SSD (preferably local NVMe SSD)
 
 ---
